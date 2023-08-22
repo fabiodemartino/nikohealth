@@ -17,12 +17,12 @@ export class PatientComponent implements OnInit, OnDestroy   {
   patient: IPatient[] =[];
 
    ngOnInit(): void {
-    /* this.sub = this.patientservice.getPatient().subscribe({
+     this.sub = this.patientservice.getPatients().subscribe({
       next: patient => {
         this.patient = patient;
       },
       error: err => this.errorMessage = err
-    }); */
+    });
   }
 
   ngOnDestroy(): void {
