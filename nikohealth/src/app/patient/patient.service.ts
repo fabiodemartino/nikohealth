@@ -16,9 +16,9 @@ export class PatientService {
       .pipe(tap(data => console.log('All:', JSON.stringify(data))),
         catchError(this.handleError));
   }
-  getPatient(id: number): Observable<IPatient | undefined>{
+  getPatient(id: string): Observable<IPatient | undefined>{
     return this.getPatients().pipe(map((patient: IPatient[]
-      ) => patient.find(e=>e.patientId == id)));
+      ) => patient.find(e=>e.Id == id)));
   }
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';

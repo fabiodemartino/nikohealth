@@ -5,9 +5,9 @@
     <div class='card-body'>
       <div *ngIf='patient.length'>
         <ul class="list-inline" *ngFor='let item of patient'>
-          <li class="wrap-left-justified-bold">Patient ID</li><p class="wrap-left-justified">{{item.patientId}}</p>
-          <li class="wrap-left-justified-bold">First Name</li><p class="wrap-left-justified">{{ item.firstName}}</p>
-          <li class="wrap-left-justified-bold">Last Name</li><p class="wrap-left-justified">{{  item.lastName}}</p>
+          <li class="wrap-left-justified-bold">Patient ID</li><p class="wrap-left-justified">{{item.Id}}</p>
+          <li class="wrap-left-justified-bold">First Name</li><p class="wrap-left-justified">{{ item.General.Name.FirstName}}</p>
+          <li class="wrap-left-justified-bold">Last Name</li><p class="wrap-left-justified">{{  item.General.Name.LastName}}</p>
           <hr class="mt-2 mb-3"/>
         </ul>
       </div>

@@ -12,7 +12,6 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule.forChild([
       { path: 'patients', component:PatientComponent},
-    
       { path: 'patient/:id',
              component:PatientComponent
       }
