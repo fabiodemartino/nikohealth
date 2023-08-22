@@ -5,25 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
-import { PatientComponent } from './patient/patient.component';
+import { PatientModule } from './patient/patient.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
-    PatientComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: 'patient', component:PatientComponent},
       {path: 'welcome', component:WelcomeComponent},
       {path: '', redirectTo: 'welcome', pathMatch:'full'},
       {path: '**', redirectTo: 'welcome', pathMatch:'full'}
-      
     ]),
+    PatientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

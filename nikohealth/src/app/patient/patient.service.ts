@@ -8,7 +8,7 @@ import { IPatient } from './ipatient';
   providedIn: 'root'
 })
 export class PatientService {
-  private nikoUrl = environment.apiUrl + 'patient';
+  private nikoUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   getPatients(): Observable<IPatient[]> {
