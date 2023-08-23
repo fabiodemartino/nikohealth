@@ -4,13 +4,13 @@ import { RouterModule } from '@angular/router';
 import { PatientComponent } from './patient.component';
 import { SharedModule } from '../shared/shared.module';
 import { PatientListComponent } from './patient-list.component';
-import { PatientEditComponent } from './patient-edit.component';
+import { PatientAddComponent } from './patient-add.component';
 
 @NgModule({
   declarations: [
     PatientComponent,
     PatientListComponent,
-    PatientEditComponent
+    PatientAddComponent
   ],
   imports: [
     CommonModule,
@@ -19,8 +19,8 @@ import { PatientEditComponent } from './patient-edit.component';
       { path: 'patient/:id',
              component:PatientComponent
       },
-      { path: 'patientEdit',
-             component:PatientEditComponent
+      { path: 'patientAdd',
+             component:PatientAddComponent
       }
     ]),
     SharedModule

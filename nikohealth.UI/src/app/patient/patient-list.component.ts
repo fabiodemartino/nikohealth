@@ -30,6 +30,6 @@ export class PatientListComponent implements OnInit, OnDestroy   {
     this.sub.unsubscribe();
   } 
   onAdd(): void {
-    this.router.navigate(['patientEdit']);
+    this.router.navigate(['patientAdd']);
   }
 }
