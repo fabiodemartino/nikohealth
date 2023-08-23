@@ -22,7 +22,7 @@ public class PatientController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
-        return Ok(PatientsDataStore.Current?.Patients);
+        return Ok(_patientsDataStore.Patients);
 
     }
 

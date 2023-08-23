@@ -8,8 +8,7 @@ namespace nikohealth.Api
     {
         private const string PatientDataFile = "nikohealth.Api.Assets.patientData.json";
         public List<PatientDto>? Patients { get; set; }
-        public static PatientsDataStore? Current { get; set; } = new();
-
+        
         public PatientsDataStore()
         {
             Patients = new List<PatientDto> { };

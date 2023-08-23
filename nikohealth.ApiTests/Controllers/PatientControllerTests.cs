@@ -48,9 +48,7 @@ namespace nikohealth.ApiTests.Controllers
             {
                 Patients = patientList
                 };
-            PatientsDataStore.Current = _patientsDataStore;
-
-
+            
             var sut = GetSut();
 
             //Act
@@ -70,9 +68,10 @@ namespace nikohealth.ApiTests.Controllers
         public async Task GivenPatientsAreRequest_WhenThereAreNoPatients_ThenANullIsReturned()
         {
             //Arrange
-            var sut = GetSut();
-            PatientsDataStore.Current = null;
+            if (_patientsDataStore != null) _patientsDataStore.Patients = null;
 
+            var sut = GetSut();
+            
             //Act
             var result = await sut.GetPatients();
 
