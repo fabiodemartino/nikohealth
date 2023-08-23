@@ -1,20 +1,20 @@
-**Angular 16 and C# API Application**
+**Angular 16 and C# API Application** <br />
 Welcome to the documentation for the Angular 16 and C# API application! This application combines the power of the Angular framework for the frontend and utilizes C# for building a robust API on the backend. This document will provide you with essential information to get started, understand the project structure, and contribute to the development of this application.
 
-**Table of Contents**
-**Introduction**
-**Features**
-**Prerequisites**
-**Installation**
-**Project Structure**
-**Usage**
-**Contributing**
-**License**
+**Table of Contents**<br />
+**Introduction**<br />
+**Features**<br />
+**Prerequisites**<br />
+**Installation**<br />
+**Project Structure**<br />
+**Usage**<br />
+**Contributing**<br />
+**License**<br />
 
-**Introduction**
+**Introduction**<br />
 This application serves as an example of how to integrate the Angular 16 frontend with a C# backend API. It demonstrates best practices for creating a modern web application that separates the user interface logic from the server-side logic. Angular 16 provides a robust framework for building dynamic and responsive user interfaces, while C# offers a powerful platform for building RESTful APIs.
 
-**Features**
+**Features**<br />
 **Angular 16 Frontend**: Utilize the power of Angular 16 to create a seamless and interactive user experience.
 
 **C# API Backend**: Develop a reliable backend using C# to handle data processing, authentication, and more.
@@ -36,7 +36,7 @@ Before you begin, ensure you have the following prerequisites:
 
 **.NET SDK**: Install the .NET SDK for C# development. You can download it from dotnet.microsoft.com.
 
-**Installation**
+**Installation**<br />
 Clone this repository to your local machine: git clone https://github.com/fabiodemartino/nikohealth.
 
 **Navigate to the frontend directory**: cd nikohealth.UI and run npm install to install frontend dependencies.
@@ -46,7 +46,7 @@ Build the solution and run it
 
 After that run the User interface with the ng serve command using Visual Studio code.
 
-**Project Structure**
+**Project Structure**<br />
 The project is structured as follows:
 
 The **nikohealth.UI**: Contains the Angular 16 frontend code.
@@ -60,14 +60,14 @@ Controllers: Contains API controller classes.
 Models: Defines data models used by the application.
 appsettings.json: Configuration settings for the backend.
 ...
-**Usage**
+**Usage**<br />
 Start the frontend development server: In the frontend directory, run ng serve. Access the app at http://localhost:4200.
 
 Run the C# backend: Build and run the backend using Visual Studio or Visual Studio Code. The API will be accessible at https://localhost:7169 or http://localhost:5169
 
 Begin developing: Use the example components and API endpoints as a starting point to build your application.
 
-License
+**License**<br />
 This project is licensed under the MIT License.
 
 Feel free to explore, experiment, and build upon this Angular 16 and C# API application. If you encounter any issues or have questions, please don't hesitate to reach out!
