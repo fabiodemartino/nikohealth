@@ -56,10 +56,16 @@ public class PatientController : ControllerBase
 
     [HttpPost]
 
-    public Task<ActionResult<PatientDto>> CreatePatient(string patientId,
+    public async Task<ActionResult<PatientDto>> CreatePatient(string patientId,
         PatientForCreationDto patient)
     {
+        var lookupPatient = _patientsDataStore.Patients?.FirstOrDefault(p => p.Id == patientId);
 
+        if (lookupPatient != null)
+        {
+            return StatusCode(409, "Duplicate patient id detected");
+
+        }
 
         var createdPatient = new PatientDto()
         {
@@ -67,7 +73,9 @@ public class PatientController : ControllerBase
             General = patient.General
         };
         
-        return Task.FromResult<ActionResult<PatientDto>>(CreatedAtRoute("GetPatient", new
+        _patientsDataStore.Patients?.Add(createdPatient);
+
+        return await Task.FromResult<ActionResult<PatientDto>>(CreatedAtRoute("GetPatient", new
         {
             patientId
         }, createdPatient));
