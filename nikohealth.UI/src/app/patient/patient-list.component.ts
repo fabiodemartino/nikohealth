@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PatientService } from './patient.service';
-import { IPatient } from './ipatient';
 import { Subscription } from 'rxjs';
+import { IPatient } from './ipatient';
 
 @Component({
-  selector: 'niko-patient',
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  selector: 'niko-patient-list',
+  templateUrl: './patient-list.component.html',
+  styleUrls: ['./patient-list.component.css']
 })
-export class PatientComponent implements OnInit, OnDestroy   {
+export class PatientListComponent implements OnInit, OnDestroy   {
   constructor(private patientservice: PatientService) { }
 
-  pageTitle = 'Patient';
+  pageTitle = 'Patients';
   errorMessage = '';
   sub!: Subscription;
   patients: IPatient[] =[];
@@ -28,4 +28,7 @@ export class PatientComponent implements OnInit, OnDestroy   {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   } 
+  onAdd(): void {
+    console.log('Not yet implemented');
+  }
 }

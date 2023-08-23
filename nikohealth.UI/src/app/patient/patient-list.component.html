@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-3">
+             
+          </div>
+          <div class="col-2">
+            <button type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="onAdd()">Add Patient</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="table-responsive">
+        <table class="table mb-0"
+               *ngIf="patients.length">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Date of Birth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td>{{ patient.General.Name.FirstName }}</td>
+              <td>{{ patient.General.Name.FirstName }}</td>
+              <td>DOB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>

@@ -10,6 +10,8 @@ namespace nikohealth.Api.Controllers;
 [Route("api/v{version:ApiVersion}/patient")]
 public class PatientController : ControllerBase
 {
+    private const string PatientDataFile = "nikohealth.Api.Assets.patientData.json";
+
     [HttpGet]
     public Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
@@ -25,7 +27,7 @@ public class PatientController : ControllerBase
     {
         try
         {
-            var jsonArray = ReadFile("nikohealth.Api.Assets.patientData.json");
+            var jsonArray = ReadFile(PatientDataFile);
             var patientDto = JsonSerializer.Deserialize<List<PatientDto>>(jsonArray);
             return new JsonResult(patientDto);
         }

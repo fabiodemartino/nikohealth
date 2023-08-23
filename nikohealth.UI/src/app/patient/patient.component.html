@@ -3,8 +3,8 @@
       {{pageTitle}}
     </div>
     <div class='card-body'>
-      <div *ngIf='patient.length'>
-        <ul class="list-inline" *ngFor='let item of patient'>
+      <div *ngIf='patients.length'>
+        <ul class="list-inline" *ngFor='let item of patients'>
           <li class="wrap-left-justified-bold">Patient ID</li><p class="wrap-left-justified">{{item.Id}}</p>
           <li class="wrap-left-justified-bold">First Name</li><p class="wrap-left-justified">{{ item.General.Name.FirstName}}</p>
           <li class="wrap-left-justified-bold">Last Name</li><p class="wrap-left-justified">{{  item.General.Name.LastName}}</p>
