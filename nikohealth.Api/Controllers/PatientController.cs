@@ -28,7 +28,7 @@ public class PatientController : ControllerBase
 
     [HttpGet("{patientId}", Name = "GetPatient")]
     public async Task<ActionResult<PatientDto>> GetPatient(
-        string patientId )
+        string patientId)
     {
         try
         {
@@ -74,7 +74,7 @@ public class PatientController : ControllerBase
             SYN_PATID = Generate_Sync_PatientId().ToString()
 
         };
-        
+
         _patientsDataStore.Patients?.Add(createdPatient);
 
         return await Task.FromResult<ActionResult<PatientDto>>(CreatedAtRoute("GetPatient", new
@@ -85,15 +85,10 @@ public class PatientController : ControllerBase
 
     }
 
-    private Guid Generate_Sync_PatientId()
+    private static Guid Generate_Sync_PatientId()
     {
         return Guid.NewGuid();
 
     }
-
-
-
-
-
-
+    
 }

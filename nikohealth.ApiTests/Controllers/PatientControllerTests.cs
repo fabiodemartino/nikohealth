@@ -1,16 +1,12 @@
-﻿using NUnit.Framework;
-using nikohealth.Api.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
+using nikohealth.Api;
+using nikohealth.Api.Controllers;
 using nikoHealth.Api.Models;
-using Microsoft.AspNetCore.Mvc;
+using NUnit.Framework;
 
-namespace nikohealth.Api.Controllers.Tests
+namespace nikohealth.ApiTests.Controllers
 {
     [TestFixture()]
     public class PatientControllerTests
