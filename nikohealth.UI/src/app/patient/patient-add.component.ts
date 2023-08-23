@@ -42,12 +42,14 @@ export class PatientAddComponent {
    
     this.patientservice.addPatient(newPatient,patientId )
         .subscribe({
+          next: p=> this.redirectToPatientList(),
           error: err => this.errorMessage = err
         });
-    
-     this.router.navigate(['patientList']);
   }
 
+  redirectToPatientList(){
+    this.router.navigate(['patientList']);
+  }
 
 }
 
