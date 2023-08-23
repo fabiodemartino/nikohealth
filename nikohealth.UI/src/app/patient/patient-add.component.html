@@ -5,29 +5,46 @@
 
     <form #patientForm="ngForm" (ngSubmit)="onSave(patientForm.value)">
         <div class="main">
-            <br/>
+            <br />
             <div class="input-fields">
                 <label for="lastName">First Name: </label>
-                 <input required name="firstName" ngModel  placeholder="First Name" id="firstName" type="text" class="input-field" />
+                <input required name="firstName" ngModel placeholder="First Name" id="firstName" type="text"
+                    class="input-field" #firstName="ngModel"/>
             </div>
-            <br/>
+            <br />
             <div class="input-fields">
                 <label for="lastName">Last Name: </label>
-                <input required name="lastName" ngModel  placeholder="Last Name" id="lastName" type="text" class="input-field" />
+                <input required name="lastName" ngModel placeholder="Last Name" id="lastName" type="text"
+                    class="input-field" #lastName="ngModel" />
             </div>
-            <br/>
+            <br />
             <div class="input-fields">
-                <label for="lastName">Date of Birth: </label>
-                <input required name="dob" ngModel  placeholder="Date of Birth" id="dob" type="date" class="input-field" />
+                <label for="dob">Date of Birth: </label>
+                <input required name="dob" ngModel placeholder="Date of Birth" id="dob" type="date"
+                    class="input-field"  #dob="ngModel" />
             </div>
-            <br/>
+            <br />
             <div class="col-12">
-                <button type="submit"
-                        class="btn btn-outline-secondary"
-                       >Save Patient</button>
-              </div>
+                <button type="submit" class="btn btn-outline-secondary">Save Patient</button>
+            </div>
         </div>
     </form>
+
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
+        <div *ngIf="firstName.errors?.['required']">
+            First Name is required.
+        </div>
+    </div>
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
+        <div *ngIf="lastName.errors?.['required']">
+            Last Name is required.
+        </div>
+    </div>
+    <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="alert">
+        <div *ngIf="dob.errors?.['required']">
+            Date of Birth is required.
+        </div>
+    </div>
 
     <div class="alert alert-danger" *ngIf="errorMessage">
         {{ errorMessage }}
