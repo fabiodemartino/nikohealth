@@ -1,4 +1,4 @@
-export interface IPatient {
+export interface Patient {
       Id:                 string;
       DisplayId:          string;
       SYN_PATID:          string;

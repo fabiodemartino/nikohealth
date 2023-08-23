@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PatientService } from './patient.service';
-import { IPatient } from './ipatient';
+import { Patient } from './patient';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class PatientComponent implements OnInit, OnDestroy   {
   pageTitle = 'Patient';
   errorMessage = '';
   sub!: Subscription;
-  patients: IPatient[] =[];
+  patients: Patient[] =[];
 
    ngOnInit(): void {
      this.sub = this.patientservice.getPatients().subscribe({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientService } from './patient.service';
-import { IPatient } from './ipatient';
+import { Patient } from './patient';
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -13,9 +13,9 @@ export class PatientEditComponent {
   constructor(private router: Router, private patientservice: PatientService) { }
   pageTitle = 'Add Patient';
   errorMessage = '';
-  patient: IPatient | undefined;
+  patient: Patient | undefined;
 
-  onSave(originalPatient: IPatient) {
+  onSave(originalPatient:Patient) {
     let patientId = uuid()
 
 

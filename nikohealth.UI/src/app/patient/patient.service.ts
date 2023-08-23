@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, catchError, tap, throwError, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { IPatient } from './ipatient';
+import { Patient } from './patient';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,16 @@ export class PatientService {
   private patientUrl = environment.apiUrl + 'patient';
   constructor(private http: HttpClient) { }
 
-  getPatients(): Observable<IPatient[]> {
-    return this.http.get<IPatient[]>(this.patientUrl)
+  getPatients(): Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.patientUrl)
       .pipe(tap(data => console.log('All:', JSON.stringify(data))),
         catchError(this.handleError));
   }
-  getPatient(id: string): Observable<IPatient | undefined>{
-    return this.getPatients().pipe(map((patient: IPatient[]
+  getPatient(id: string): Observable<Patient | undefined>{
+    return this.getPatients().pipe(map((patient: Patient[]
       ) => patient.find(e=>e.Id == id)));
   }
-  addPatient(data: IPatient): Observable<any>{
+  addPatient(data: Patient): Observable<any>{
     return this.http.post(`${this.patientUrl}`, data);
   }
   private handleError(err: HttpErrorResponse): Observable<never> {
