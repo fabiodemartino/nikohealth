@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/nikohealth.Api/.vs/nikohealth.Api/FileContentIndex
+/nikohealth.Api/.vs/nikohealth.Api/v17
+/nikohealth.Api/bin/Debug/net6.0
+/nikohealth.Api/obj
+/nikohealth.Api/logs
