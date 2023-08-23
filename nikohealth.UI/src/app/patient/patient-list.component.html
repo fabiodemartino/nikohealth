@@ -32,7 +32,7 @@
             <tr *ngFor="let patient of patients">
               <td>{{ patient.General.Name.FirstName }}</td>
               <td>{{ patient.General.Name.LastName }}</td>
-              <td>{{ patient.General.DateOfBirth }}</td>
+              <td>{{ patient.General.DateOfBirth | date }}</td>
               <td>{{ patient.SYN_PATID }}</td>
             </tr>
           </tbody>

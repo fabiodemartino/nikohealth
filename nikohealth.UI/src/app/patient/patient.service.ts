@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable, catchError, tap, throwError, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Patient } from './patient';
@@ -20,8 +20,10 @@ export class PatientService {
     return this.getPatients().pipe(map((patient: Patient[]
       ) => patient.find(e=>e.Id == id)));
   }
-  addPatient(data: Patient): Observable<any>{
-    return this.http.post(`${this.patientUrl}`, data);
+  addPatient(patientData: Patient, id: string): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body=JSON.stringify(patientData);
+    return this.http.post(this.patientUrl + `?patientId=${id}` , body,{ headers })
   }
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';

@@ -15,21 +15,35 @@ export class PatientAddComponent {
   errorMessage = '';
   patient: Patient | undefined;
 
-   
+  onSave(patientForm:any) {
 
-  onSave(formPatient:any) {
+  // generate a random patient id
    let patientId = uuid()
-  
-
-   /* newPatient.General.DateOfBirth = originalPatient.dob;
-   newPatient.General.Name.FirstName = originalPatient.firstName;
-   newPatient.General.Name.FirstName = originalPatient.LastName;
-   newPatient.Id = patientId; */
+   const newPatient = <Patient>{
+     Id:patientId,
+     SYN_PATID: '',
+     General:{
+      Name:{
+        FirstName: patientForm.firstName,
+        LastName: patientForm.lastName,
+        MiddleName: ""
+      },
+      DateOfBirth: patientForm.dob,
+      // default model required fields
+      Gender: '',
+      Prefix: '',
+      Weight: 0,
+      Height: 0,
+      Ssn: "",
+      NickName: '',
+      MaritalStatus: ''
+      }
+   };
    
-  /*  this.patientservice.addPatient(newPatient)
-        .subscribe((response: any) => {
-        console.log(response)
-      })  */
+    this.patientservice.addPatient(newPatient,patientId )
+        .subscribe({
+          error: err => this.errorMessage = err
+        });
     
      this.router.navigate(['patientList']);
   }

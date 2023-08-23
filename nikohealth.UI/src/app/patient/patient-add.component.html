@@ -5,16 +5,27 @@
 
     <form #patientForm="ngForm" (ngSubmit)="onSave(patientForm.value)">
         <div class="main">
+            <br/>
             <div class="input-fields">
-                <input name="firstName"  placeholder="First Name" id="firstName" type="text" class="input-field" />
+                <label for="lastName">First Name: </label>
+                 <input name="firstName" ngModel  placeholder="First Name" id="firstName" type="text" class="input-field" />
             </div>
+            <br/>
             <div class="input-fields">
-                <input name="lastName"  placeholder="Last Name" id="lastName" type="text" class="input-field" />
+                <label for="lastName">Last Name: </label>
+                <input name="lastName" ngModel  placeholder="Last Name" id="lastName" type="text" class="input-field" />
             </div>
+            <br/>
             <div class="input-fields">
-                <input name="dob"  placeholder="Date of Birth" id="dob" type="date" class="input-field" />
+                <label for="lastName">Date of Birth: </label>
+                <input name="dob" ngModel  placeholder="Date of Birth" id="dob" type="date" class="input-field" />
             </div>
-            <button>Save Data </button>
+            <br/>
+            <div class="col-12">
+                <button type="submit"
+                        class="btn btn-outline-secondary"
+                       >Save Patient</button>
+              </div>
         </div>
     </form>
 
