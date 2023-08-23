@@ -40,8 +40,13 @@ public class PatientController : ControllerBase
     public Task<ActionResult<PatientDto>> CreatePatient(string patientId,
         PatientForCreationDto patient)
     {
-        var createdPatient = new PatientDto();
 
+        var createdPatient = new PatientDto()
+        {
+            Id = patientId,
+            General = patient.General
+        };
+        
         return Task.FromResult<ActionResult<PatientDto>>(CreatedAtRoute("GetPatient", new
         {
             patientId

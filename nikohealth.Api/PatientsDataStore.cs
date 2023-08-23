@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using nikoHealth.Api.Models;
+﻿using nikoHealth.Api.Models;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace nikohealth.Api
 {
@@ -10,11 +8,11 @@ namespace nikohealth.Api
     {
         private const string PatientDataFile = "nikohealth.Api.Assets.patientData.json";
         public List<PatientDto>? Patients { get; set; }
-        public static PatientsDataStore Current { get;  } = new PatientsDataStore();
+        public static PatientsDataStore Current { get; } = new();
 
         public PatientsDataStore()
         {
-            Patients = new List<PatientDto>(){};
+            Patients = new List<PatientDto> { };
             Patients = JsonSerializer.Deserialize<List<PatientDto>>(LoadPatientData());
         }
 
@@ -36,7 +34,7 @@ namespace nikohealth.Api
                 Console.WriteLine(e);
 
             }
-             return string.Empty;
+            return string.Empty;
         }
 
         /// <summary>
