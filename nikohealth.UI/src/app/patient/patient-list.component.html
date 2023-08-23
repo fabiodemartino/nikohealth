@@ -25,13 +25,15 @@
               <th>First Name</th>
               <th>Last Name</th>
               <th>Date of Birth</th>
+              <th>Sync Patient ID</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let patient of patients">
               <td>{{ patient.General.Name.FirstName }}</td>
               <td>{{ patient.General.Name.FirstName }}</td>
-              <td>DOB</td>
+              <td>{{ patient.General.DateOfBirth }}</td>
+              <td>{{ patient.SYN_PATID }}</td>
             </tr>
           </tbody>
         </table>

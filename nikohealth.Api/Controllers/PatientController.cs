@@ -70,7 +70,9 @@ public class PatientController : ControllerBase
         var createdPatient = new PatientDto()
         {
             Id = patientId,
-            General = patient.General
+            General = patient.General,
+            SYN_PATID = Generate_Sync_PatientId().ToString()
+
         };
         
         _patientsDataStore.Patients?.Add(createdPatient);
@@ -83,9 +85,15 @@ public class PatientController : ControllerBase
 
     }
 
+    private Guid Generate_Sync_PatientId()
+    {
+        return Guid.NewGuid();
 
-    
+    }
 
-    
+
+
+
+
 
 }

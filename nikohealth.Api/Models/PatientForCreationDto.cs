@@ -7,7 +7,8 @@ namespace nikohealth.Api.Models
     {
         [JsonPropertyName("Id")]
         public string Id { get; set; }
-        
+        [JsonPropertyName("SYN_PATID")]
+        public string SYN_PATID { get; set; }
         [JsonPropertyName("General")] public General General { get; set; }
 
     }

@@ -1,6 +1,7 @@
 export interface IPatient {
       Id:                 string;
       DisplayId:          string;
+      SYN_PATID:          string;
       General:            General;
       Status:             Status;
       Addresses:          Addresses;
