@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using nikoHealth.Api.Models;
-using System.Reflection;
 using nikohealth.Api.Models;
 
 namespace nikohealth.Api.Controllers;
@@ -11,6 +9,16 @@ namespace nikohealth.Api.Controllers;
 [Route("api/v{version:ApiVersion}/patient")]
 public class PatientController : ControllerBase
 {
+
+    private readonly ILogger<PatientController> _logger;
+    private readonly PatientsDataStore _patientsDataStore;
+    public PatientController(ILogger<PatientController> logger,
+       PatientsDataStore patientsDataStore)
+    {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _patientsDataStore = patientsDataStore ?? throw new ArgumentNullException(nameof(patientsDataStore));
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
@@ -22,17 +30,28 @@ public class PatientController : ControllerBase
     public async Task<ActionResult<PatientDto>> GetPatient(
         string patientId )
     {
-        if (PatientsDataStore.Current.Patients != null)
+        try
         {
-            var patientToReturn = PatientsDataStore.Current.Patients.FirstOrDefault(
-                p => p.Id == patientId);
-            if (patientToReturn == null)
+            if (_patientsDataStore.Patients != null)
             {
-                return NotFound();
+                var patientToReturn = _patientsDataStore.Patients.FirstOrDefault(
+                    p => p.Id == patientId);
+                if (patientToReturn == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(patientToReturn);
             }
-            return Ok(patientToReturn);
+            return StatusCode(500, "A problem happened while handling your request.");
         }
-        return BadRequest();
+        catch (Exception ex)
+        {
+            _logger.LogCritical(
+                $"Exception while getting patient data for patient with id {patientId}.",
+                ex);
+            return StatusCode(500, "A problem happened while handling your request.");
+        }
     }
 
     [HttpPost]
@@ -40,6 +59,7 @@ public class PatientController : ControllerBase
     public Task<ActionResult<PatientDto>> CreatePatient(string patientId,
         PatientForCreationDto patient)
     {
+
 
         var createdPatient = new PatientDto()
         {

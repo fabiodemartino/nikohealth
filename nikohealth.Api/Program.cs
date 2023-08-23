@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using nikohealth.Api;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -44,6 +45,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddSingleton<PatientsDataStore>();
 
 var app = builder.Build();
 
