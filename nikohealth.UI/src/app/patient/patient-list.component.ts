@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PatientService } from './patient.service';
 import { Subscription } from 'rxjs';
 import { IPatient } from './ipatient';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'niko-patient-list',
@@ -9,7 +10,7 @@ import { IPatient } from './ipatient';
   styleUrls: ['./patient-list.component.css']
 })
 export class PatientListComponent implements OnInit, OnDestroy   {
-  constructor(private patientservice: PatientService) { }
+  constructor(private router: Router, private patientservice: PatientService) { }
 
   pageTitle = 'Patients';
   errorMessage = '';
@@ -29,6 +30,6 @@ export class PatientListComponent implements OnInit, OnDestroy   {
     this.sub.unsubscribe();
   } 
   onAdd(): void {
-    console.log('Not yet implemented');
+    this.router.navigate(['addPatient']);
   }
 }

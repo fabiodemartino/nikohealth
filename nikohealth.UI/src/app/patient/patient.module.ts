@@ -16,6 +16,9 @@ import { PatientListComponent } from './patient-list.component';
       { path: 'patientList', component:PatientListComponent},
       { path: 'patient/:id',
              component:PatientComponent
+      },
+      { path: 'addPatient/:id',
+             component:PatientComponent
       }
     ]),
     SharedModule

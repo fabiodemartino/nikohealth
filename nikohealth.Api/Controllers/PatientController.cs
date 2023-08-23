@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using nikoHealth.Api.Models;
 using System.Reflection;
+using nikohealth.Api.Models;
 
 namespace nikohealth.Api.Controllers;
 
@@ -10,52 +11,48 @@ namespace nikohealth.Api.Controllers;
 [Route("api/v{version:ApiVersion}/patient")]
 public class PatientController : ControllerBase
 {
-    private const string PatientDataFile = "nikohealth.Api.Assets.patientData.json";
-
     [HttpGet]
-    public Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
+    public async Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
-        return Task.FromResult<ActionResult<IEnumerable<PatientDto>>>(LoadPatient());
+        return Ok(PatientsDataStore.Current.Patients);
+
     }
 
-
-    /// <summary>
-    /// Load Patient data
-    /// </summary>
-    /// <returns>a Json result</returns>
-    private static JsonResult LoadPatient()
+    [HttpGet("{patientId}", Name = "GetPatient")]
+    public async Task<ActionResult<PatientDto>> GetPatient(
+        string patientId )
     {
-        try
+        if (PatientsDataStore.Current.Patients != null)
         {
-            var jsonArray = ReadFile(PatientDataFile);
-            var patientDto = JsonSerializer.Deserialize<List<PatientDto>>(jsonArray);
-            return new JsonResult(patientDto);
+            var patientToReturn = PatientsDataStore.Current.Patients.FirstOrDefault(
+                p => p.Id == patientId);
+            if (patientToReturn == null)
+            {
+                return NotFound();
+            }
+            return Ok(patientToReturn);
         }
-        catch (Exception e)
-        {
-            // to do add logging here
-            Console.WriteLine(e);
-            
-        }
-
-        return new JsonResult(null);
+        return BadRequest();
     }
 
-    /// <summary>
-    /// Read an embedded resource file and return its content as string
-    /// </summary>
-    /// <param name="fileToRead"></param>
-    /// <returns>a string containing the file content</returns>
-    private static string ReadFile(string fileToRead)
+    [HttpPost]
+
+    public Task<ActionResult<PatientDto>> CreatePatient(string patientId,
+        PatientForCreationDto patient)
     {
-        var assembly = Assembly.GetExecutingAssembly();
-        var result = string.Empty;
-        using var stream = assembly.GetManifestResourceStream(fileToRead);
-        if (stream == null) return result;
-        using var reader = new StreamReader(stream);
-        result = reader.ReadToEnd();
+        var createdPatient = new PatientDto();
 
-        return result;
+        return Task.FromResult<ActionResult<PatientDto>>(CreatedAtRoute("GetPatient", new
+        {
+            patientId
+        }, createdPatient));
+
+
     }
+
+
+    
+
+    
 
 }
