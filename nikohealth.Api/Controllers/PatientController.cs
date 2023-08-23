@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using nikoHealth.Api.Models;
+using System.Reflection;
 
 namespace nikohealth.Api.Controllers;
 
@@ -10,180 +11,49 @@ namespace nikohealth.Api.Controllers;
 public class PatientController : ControllerBase
 {
     [HttpGet]
-    public JsonResult GetPatient()
+    public Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
-        return LoadPatient();
+        return Task.FromResult<ActionResult<IEnumerable<PatientDto>>>(LoadPatient());
     }
 
-    private JsonResult LoadPatient()
+
+    /// <summary>
+    /// Load Patient data
+    /// </summary>
+    /// <returns>a Json result</returns>
+    private static JsonResult LoadPatient()
     {
-        const string jsonArray = @"
-                    [
-                    {
-                        ""Id"": ""1"",
-                        ""DisplayId"": ""1"",
-                        ""General"": {
-                          ""Name"": {
-                            ""FirstName"": ""Fabio"",
-                            ""LastName"": ""De Martino"",
-                            ""MiddleName"": ""string""
-                          },
-                          ""DateOfBirth"": ""2023-08-22"",
-                          ""Gender"": ""Unknown"",
-                          ""Prefix"": ""Mr"",
-                          ""Weight"": 0,
-                          ""Height"": 0,
-                          ""Ssn"": ""Something"",
-                          ""NickName"": ""string"",
-                          ""MaritalStatus"": ""Single""
-                        },
-                        ""Status"": {
-                          ""Status"": ""Active"",
-                          ""DcDate"": ""2023-08-22"",
-                          ""InactiveStatus"": ""InsuranceExpired"",
-                          ""InactiveStatusText"": ""string""
-                        },
-                        ""Addresses"": {
-                          ""Patient"": {
-                            ""AddressLine"": ""Some where"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""string""
-                          },
-                          ""Delivery"": {
-                            ""AddressLine"": ""string"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""strin""
-                          },
-                          ""SkipPatientAddressVerification"": true,
-                          ""SkipDeliveryAddressVerification"": true
-                        },
-                        ""Contacts"": {
-                          ""Contacts"": [
-                            {
-                              ""Type"": ""Home"",
-                              ""Value"": ""string"",
-                              ""Ext"": ""string""
-                            }
-                          ],
-                          ""PreferredContactType"": ""Home"",
-                          ""PreferredCallTime"": ""Morning""
-                        },
-                        ""SignatureOnFile"": {
-                          ""IsSigned"": true,
-                          ""SignedDate"": ""2023-08-22""
-                        },
-                        ""EmergencyContact"": {
-                          ""Person"": {
-                            ""FirstName"": ""string"",
-                            ""LastName"": ""string"",
-                            ""MiddleName"": ""string""
-                          },
-                          ""Relationship"": ""Child"",
-                          ""RelationshipOther"": ""string"",
-                          ""Address"": {
-                            ""AddressLine"": ""string"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""strin""
-                          },
-                          ""Contacts"": [
-                            {
-                              ""Type"": ""Home"",
-                              ""Value"": ""string"",
-                              ""Ext"": ""string""
-                            }
-                          ]
-                        },
-                        ""EmployerContact"": {
-                          ""Employer"": ""string"",
-                          ""Address"": {
-                            ""AddressLine"": ""string"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""strin""
-                          },
-                          ""Contacts"": [
-                            {
-                              ""Type"": ""Home"",
-                              ""Value"": ""string"",
-                              ""Ext"": ""string""
-                            }
-                          ]
-                        },
-                        ""ResponsibleContact"": {
-                          ""Person"": {
-                            ""FirstName"": ""string"",
-                            ""LastName"": ""string"",
-                            ""MiddleName"": ""string""
-                          },
-                          ""Type"": ""Spouse"",
-                          ""Address"": {
-                            ""AddressLine"": ""string"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""strin""
-                          },
-                          ""Contacts"": [
-                            {
-                              ""Type"": ""Home"",
-                              ""Value"": ""string"",
-                              ""Ext"": ""string""
-                            }
-                          ]
-                        },
-                        ""MedicalReleaseInfo"": [
-                          {
-                            ""Name"": {
-                              ""FirstName"": ""string"",
-                              ""LastName"": ""string"",
-                              ""MiddleName"": ""string""
-                            },
-                            ""RelationType"": ""Spouse"",
-                            ""Email"": ""string"",
-                            ""Phone"": ""string""
-                          }
-                        ],
-                        ""Location"": {
-                          ""Id"": ""string"",
-                          ""Name"": ""string"",
-                          ""Npi"": ""string""
-                        },
-                        ""FacilityLocation"": {
-                          ""Id"": ""string"",
-                          ""Address"": {
-                            ""AddressLine"": ""string"",
-                            ""AddressLine2"": ""string"",
-                            ""City"": ""string"",
-                            ""State"": ""st"",
-                            ""Zip"": ""strin""
-                          }
-                        },
-                        ""Tags"": [
-                          {
-                            ""Id"": ""string"",
-                            ""Name"": ""string""
-                          }
-                        ],
-                        ""TaxExemption"": {
-                          ""Enabled"": true,
-                          ""Note"": ""string""
-                        }
-                      }
-                    ]
-                 ";
+        try
+        {
+            var jsonArray = ReadFile("nikohealth.Api.Assets.patientData.json");
+            var patientDto = JsonSerializer.Deserialize<List<PatientDto>>(jsonArray);
+            return new JsonResult(patientDto);
+        }
+        catch (Exception e)
+        {
+            // to do add logging here
+            Console.WriteLine(e);
+            
+        }
 
-        var patientDto = JsonSerializer.Deserialize<List<PatientDto>>(jsonArray);
+        return new JsonResult(null);
+    }
 
-        return new JsonResult(patientDto);
+    /// <summary>
+    /// Read an embedded resource file and return its content as string
+    /// </summary>
+    /// <param name="fileToRead"></param>
+    /// <returns>a string containing the file content</returns>
+    private static string ReadFile(string fileToRead)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        var result = string.Empty;
+        using var stream = assembly.GetManifestResourceStream(fileToRead);
+        if (stream == null) return result;
+        using var reader = new StreamReader(stream);
+        result = reader.ReadToEnd();
 
-
+        return result;
     }
 
 }
