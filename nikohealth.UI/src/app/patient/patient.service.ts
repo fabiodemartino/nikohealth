@@ -8,17 +8,20 @@ import { IPatient } from './ipatient';
   providedIn: 'root'
 })
 export class PatientService {
-  private nikoUrl = environment.apiUrl + 'patient';
+  private patientUrl = environment.apiUrl + 'patient';
   constructor(private http: HttpClient) { }
 
   getPatients(): Observable<IPatient[]> {
-    return this.http.get<IPatient[]>(this.nikoUrl)
+    return this.http.get<IPatient[]>(this.patientUrl)
       .pipe(tap(data => console.log('All:', JSON.stringify(data))),
         catchError(this.handleError));
   }
   getPatient(id: string): Observable<IPatient | undefined>{
     return this.getPatients().pipe(map((patient: IPatient[]
       ) => patient.find(e=>e.Id == id)));
+  }
+  addPatient(data: IPatient): Observable<any>{
+    return this.http.post(`${this.patientUrl}`, data);
   }
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';

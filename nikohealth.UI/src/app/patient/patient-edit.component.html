@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+
+    <form #patientForm="ngForm" (ngSubmit)="onSave(patientForm.value)">
+        <div class="main">
+            <div class="input-fields">
+                <input name="firstName" ngModel placeholder="First Name" id="firstName" type="text" class="input-field" />
+            </div>
+            <div class="input-fields">
+                <input name="lastName" ngModel placeholder="Last Name" id="lastName" type="text" class="input-field" />
+            </div>
+            <div class="input-fields">
+                <input name="dob" ngModel placeholder="Date of Birth" id="dob" type="date" class="input-field" />
+            </div>
+            <button>Save Data </button>
+        </div>
+    </form>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
