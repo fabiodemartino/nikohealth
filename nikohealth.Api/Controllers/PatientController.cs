@@ -13,7 +13,7 @@ public class PatientController : ControllerBase
     private readonly ILogger<PatientController> _logger;
     private readonly PatientsDataStore _patientsDataStore;
     public PatientController(ILogger<PatientController> logger,
-       PatientsDataStore patientsDataStore)
+       PatientsDataStore? patientsDataStore)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _patientsDataStore = patientsDataStore ?? throw new ArgumentNullException(nameof(patientsDataStore));
@@ -22,7 +22,7 @@ public class PatientController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PatientDto>>> GetPatients()
     {
-        return Ok(PatientsDataStore.Current.Patients);
+        return Ok(PatientsDataStore.Current?.Patients);
 
     }
 

@@ -8,3 +8,5 @@
 /nikohealth.Api/obj
 /nikohealth.Api/logs
 /nikohealth.Api/.vs
+/nikohealth.ApiTests/bin/Debug/net6.0
+/nikohealth.ApiTests/obj
